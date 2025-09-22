@@ -9,7 +9,7 @@ public class MemoryMemberRepositoryTest {
     @Test
     public void save() {
         Member member = new Member();
-        member.setName("spring");
+        member.setName("sprfing");
 
         repository.save(member);
 
