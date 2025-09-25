@@ -30,6 +30,7 @@ public class HelloController {
         return "hello" + name;
     }
 
+    //GDGoC API 1번
     @GetMapping("hello-api")
     @ResponseBody
     public Hello helloApi(@RequestParam("name") String name) {

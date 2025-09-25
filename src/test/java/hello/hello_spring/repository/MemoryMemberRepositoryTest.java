@@ -1,15 +1,23 @@
 package hello.hello_spring.repository;
 
 import hello.hello_spring.domain.Member;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
+//Test 주도 개발(TDD)
 //test 케이스의 장점 : class 단위로 돌려볼 수 있음
 public class MemoryMemberRepositoryTest {
-    MemberRepository repository = new MemoryMemberRepository();
+    MemoryMemberRepository repository = new MemoryMemberRepository();
+
+    //test 케이스는 순서에 의존하지 않도록 설계해야함. test가 끝날 때마다 clear.
+    @AfterEach
+    public void afterEach() {
+        repository.clearStore();
+    }
 
     @Test
     public void save() {
@@ -51,8 +59,10 @@ public class MemoryMemberRepositoryTest {
         member2.setName("spring2");
         repository.save(member2);
 
-        List<Member> all = repository.findAll();
-
+        //when
+        List<Member> result = repository.findAll();
+        //then
+        assertThat(result.size()).isEqualTo(2);
 
     }
 }
