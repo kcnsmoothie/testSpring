@@ -1,9 +1,8 @@
 package hello.hello_spring.service;
 
 import hello.hello_spring.domain.Member;
-import hello.hello_spring.repository.MemberRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -13,6 +12,11 @@ class MemberServiceTest {
 
     //테스트 코드같은 경우는 한국어로 써도 됨. 빌드 시에 포함 안되니까요
     MemberService memberService = new MemberService();
+
+    @BeforeEach
+    public void beforeEach() {
+
+    }
 
     @Test
     void join() {

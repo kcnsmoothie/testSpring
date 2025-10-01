@@ -17,19 +17,19 @@ public class MemberService {
         //Optional<Member> result = memberRepository.findByName(member.getName());
         //기존에는 ifNull을 했겠지만, Optional로 감쌌으니까 ifPresent를 사용해도 됨.
         //값이 없으면 orElseGet을 사용해볼 수도 있음
-        validateDuplicateMember(member, memberRepository);
-
+        validateDuplicateMember(member); //중복 회원 검증
         memberRepository.save(member);
         return member.getId();
     }
 
-    private void validateDuplicateMember(Member member, MemberRepository memberRepository) {
+    private void validateDuplicateMember(Member member) {
         memberRepository.findByName(member.getName())
                 .ifPresent(m -> {
                     throw new IllegalStateException("이미 존재하는 회원입니다.");
                 });
     }
 
+    /*전체 회원 조회*/
     public List<Member> findMembers() {
         return memberRepository.findAll();
     }

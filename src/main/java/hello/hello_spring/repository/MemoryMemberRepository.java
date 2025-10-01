@@ -6,7 +6,7 @@ import java.util.*;
 
 public class MemoryMemberRepository implements MemberRepository {
 
-    //실무에서는 동시성 문제가 있을 수 있어 cocurrent hashmap 사용
+    //실무에서는 동시성 문제가 있을 수 있어 concurrent hashmap 사용
     private static Map<Long, Member> store = new HashMap<>();
     private static long sequence = 0L;
 

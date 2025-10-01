@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.*;
 
 //Test 주도 개발(TDD)
 //test 케이스의 장점 : class 단위로 돌려볼 수 있음
-public class MemoryMemberRepositoryTest {
+class MemoryMemberRepositoryTest {
     MemoryMemberRepository repository = new MemoryMemberRepository();
 
     //test 케이스는 순서에 의존하지 않도록 설계해야함. test가 끝날 때마다 clear.
@@ -21,11 +21,14 @@ public class MemoryMemberRepositoryTest {
 
     @Test
     public void save() {
+        //given
         Member member = new Member();
         member.setName("spring");
 
+        //when
         repository.save(member);
 
+        //then
         //optional에서 꺼내는 거니까 get으로 꺼내볼 수도 있음
         Member result = repository.findById(member.getId()).get();
         //System.out.println("result = " + (result = member));
@@ -37,6 +40,7 @@ public class MemoryMemberRepositoryTest {
 
     @Test
     public void findByName() {
+        //given
         Member member1 = new Member();
         member1.setName("spring1");
         repository.save(member1);
@@ -45,12 +49,16 @@ public class MemoryMemberRepositoryTest {
         member2.setName("spring2");
         repository.save(member2);
 
+        //when
         Member member = repository.findByName("spring1").get();
+
+        //then
         assertThat(member).isEqualTo(member1);
     }
 
     @Test
     public void findAll() {
+        //given
         Member member1 = new Member();
         member1.setName("spring1");
         repository.save(member1);
@@ -61,8 +69,8 @@ public class MemoryMemberRepositoryTest {
 
         //when
         List<Member> result = repository.findAll();
+
         //then
         assertThat(result.size()).isEqualTo(2);
-
     }
 }
