@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service //스프링 빈에 서비스를 등록해줌, Service 안에 Component 애노테이션 붙어있음.
+
 public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    @Autowired //memberService는 memberRepository가 필요함
+
     //외부에서 memberRepository를 주입하도록 함(DI)
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
