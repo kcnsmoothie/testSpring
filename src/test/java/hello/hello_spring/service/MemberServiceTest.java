@@ -1,7 +1,9 @@
 package hello.hello_spring.service;
 
 import hello.hello_spring.domain.Member;
+import hello.hello_spring.repository.MemoryMemberRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,16 +12,24 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MemberServiceTest {
 
-    //테스트 코드같은 경우는 한국어로 써도 됨. 빌드 시에 포함 안되니까요
-    MemberService memberService = new MemberService();
+    MemberService memberService;
+    MemoryMemberRepository memberRepository;
 
+    //테스트를 독립적으로 실행
     @BeforeEach
     public void beforeEach() {
+        memberRepository = new MemoryMemberRepository();
+        //memberService로 memberRepo를 생성하여 넣어줬음
+        memberService = new MemberService(memberRepository);
+    }
 
+    @AfterEach
+    public void afterEach() {
+        memberRepository.clearStore();
     }
 
     @Test
-    void join() {
+    void 회원가입() {
         //given
         Member member = new Member();
         member.setName("spring");
@@ -56,18 +66,5 @@ class MemberServiceTest {
 
         //then
 
-    }
-
-    private static Member getMember() {
-        Member member1 = new Member();
-        return member1;
-    }
-
-    @Test
-    void findMembers() {
-    }
-
-    @Test
-    void findOne() {
     }
 }
